@@ -1,0 +1,97 @@
+body {
+    min-height: 90vh;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    margin-left: 25vw;
+    margin-right: 25vw;
+    color: rgb(102, 150, 255);
+
+    background-color: rgb(230, 238, 255);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+main {
+    background-color: white;
+    border-radius: 10px;
+    width: 50vw;
+    height: 90vh;
+}
+
+header {
+    background-color: rgb(179, 204, 255);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 45vw;
+    height: 20vh;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0 2.5vw;
+}
+
+button {
+    background-color: rgb(230, 238, 255);
+    color: rgb(102, 150, 255);
+    border: rgb(102, 150, 255) solid 2px;
+    border-radius: 5px;
+    font-size: 1rem;
+    padding: 10px;
+
+    transition: .5s;
+}
+
+section {
+    padding: 0 2.5vw;
+}
+
+section ul {
+    padding: 0;
+    height: 52.5vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 1vh 1vw;
+    overflow: auto;
+
+    list-style:none;
+}
+
+section ul li {
+    height: 25.25vh;
+    width: 9vw;
+    background-color: rgb(230, 238, 255);
+    color: rgb(102, 150, 255);
+    border: rgb(102, 150, 255) solid 2px;
+    border-radius: 5px;
+    padding: 10px;
+
+    transition: .5s;
+}
+
+section ul li:hover {
+    background-color: rgb(179, 204, 255);
+    color: rgb(77, 133, 255);
+    border: rgb(77, 133, 255) solid 2px;
+}
+
+button:hover {
+    background-color: rgb(179, 204, 255);
+    color: rgb(77, 133, 255);
+    border: rgb(77, 133, 255) solid 2px;
+}
+
+header button:first-of-type {
+    margin-left: 2.5vw;
+}
+
+header button:not(:first-of-type) {
+    margin-left: 1.25vw;
+}
+
+a {
+    color: rgb(77, 133, 255);
+}
+
+a:hover {
+    text-decoration: underline;
+}
