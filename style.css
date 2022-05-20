@@ -30,7 +30,7 @@ header {
     padding: 0 2.5vw;
 }
 
-button {
+button, input[type="submit"] {
     background-color: rgb(230, 238, 255);
     color: rgb(102, 150, 255);
     border: rgb(102, 150, 255) solid 2px;
@@ -39,6 +39,24 @@ button {
     padding: 10px;
 
     transition: .5s;
+}
+
+input[type="text"] {
+    border-radius: 5px;
+    border: rgb(102, 150, 255) solid 2px;
+    padding: 10px;
+    font-size: 1rem;
+}
+
+textarea {
+    resize: none;
+    height: 30vh;
+    width: 45vw;
+    border-radius: 5px;
+    border: rgb(102, 150, 255) solid 2px;
+    padding: 10px;
+    font-size: 0.9rem;
+    font-family: monospace;
 }
 
 section {
@@ -74,7 +92,7 @@ section ul li:hover {
     border: rgb(77, 133, 255) solid 2px;
 }
 
-button:hover {
+button:hover, input[type="submit"]:hover {
     background-color: rgb(179, 204, 255);
     color: rgb(77, 133, 255);
     border: rgb(77, 133, 255) solid 2px;
@@ -89,6 +107,7 @@ header button:not(:first-of-type) {
 }
 
 a {
+    font-weight: bold;
     color: rgb(77, 133, 255);
 }
 
