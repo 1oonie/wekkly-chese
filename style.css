@@ -4,10 +4,14 @@ body {
     margin-bottom: 5vh;
     margin-left: 25vw;
     margin-right: 25vw;
-    color: rgb(102, 150, 255);
+    color: rgb(11, 34, 84);
 
-    background-color: rgb(230, 238, 255);
+    background-color: rgb(149, 173, 225);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    display: flex;
+    flex-direction: column;
+    align-content: stretch;
 }
 
 main {
@@ -15,6 +19,12 @@ main {
     border-radius: 10px;
     width: 50vw;
     height: 90vh;
+
+    display: flex;
+    flex-direction: column;
+    align-content: stretch;
+
+    box-shadow: 5px 5px #000000;
 }
 
 header {
@@ -22,23 +32,43 @@ header {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     width: 45vw;
-    height: 20vh;
+    height: 15vh;
 
     display: flex;
     align-items: center;
+    align-content: center;
     flex-wrap: wrap;
-    padding: 0 2.5vw;
+    padding: 2vh 2.5vw;
 }
 
-button, input[type="submit"] {
+@media screen and (max-width: 900px) {
+    body{
+        margin: 10px !important;
+    }
+    main {
+        width: auto;
+    }
+    header {
+        width: auto;
+    }
+}
+
+nav {
+    flex-grow: 1;
+    display: inline-flex;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+button, nav a, input[type="submit"] {
     background-color: rgb(230, 238, 255);
-    color: rgb(102, 150, 255);
     border: rgb(102, 150, 255) solid 2px;
     border-radius: 5px;
     font-size: 1rem;
     padding: 10px;
 
-    transition: .5s;
+    transition: .2s;
 }
 
 input[type="text"] {
@@ -48,10 +78,16 @@ input[type="text"] {
     font-size: 1rem;
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 5px;
+}
+
 textarea {
     resize: none;
     height: 30vh;
-    width: 43.5vw;
     border-radius: 5px;
     border: rgb(102, 150, 255) solid 2px;
     padding: 10px;
@@ -67,18 +103,22 @@ section ul {
     padding: 0;
     height: 52.5vh;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 1vh 1vw;
     overflow: auto;
 
     list-style:none;
 }
 
-section ul li {
+section ul li a {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+
     height: 25.25vh;
-    width: 9vw;
     background-color: rgb(230, 238, 255);
-    color: rgb(102, 150, 255);
+    color: rgb(28, 35, 37);
+    font-weight: normal;
     border: rgb(102, 150, 255) solid 2px;
     border-radius: 5px;
     padding: 10px;
@@ -86,29 +126,42 @@ section ul li {
     transition: .5s;
 }
 
-section ul li:hover {
-    background-color: rgb(179, 204, 255);
-    color: rgb(77, 133, 255);
+section ul li :after {
+    content: "Read More\A0\226b";
+    text-align: right;
+    font-size: larger;
+
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+section ul li a ::after {
+    content: "";
+}
+
+@media screen and (max-width: 900px) {
+    section ul {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+section ul li a:hover {
+    background-color: rgb(255, 255, 255);
+    color: rgb(26, 31, 44);
     border: rgb(77, 133, 255) solid 2px;
 }
 
-button:hover, input[type="submit"]:hover {
+a:hover, input[type="submit"]:hover {
     background-color: rgb(179, 204, 255);
     color: rgb(77, 133, 255);
     border: rgb(77, 133, 255) solid 2px;
-}
-
-header button:first-of-type {
-    margin-left: 2.5vw;
-}
-
-header button:not(:first-of-type) {
-    margin-left: 1.25vw;
+    text-decoration: underline;
 }
 
 a {
     font-weight: bold;
-    color: rgb(77, 133, 255);
+    color: rgb(11, 34, 84);
 }
 
 a:hover {

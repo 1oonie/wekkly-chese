@@ -2,26 +2,30 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
+        <title>Submit Article | The Wekkly Chese</title>
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <main>
             <header>
                 <h1>The Wekkly Chese</h1>
-                <button><a>Submit an article</a></button>
-                <button><a>Alan Portal</a></button>
+                <nav>
+                    <a href="index.html">Home</a>
+                    <a href="alan.html">Alan Portal</a>
+                </nav>
             </header>
             <section>
                 <p>Write a lovely article to be submitted and then reviewed by impartial(?) judgement.</p>
                 <h3>Article submit form</h3>
                 <form autocomplete="off" autocapitalize="on">
                     <label for="name">Name:</label>
-                    <input type="text" name="name" placeholder="Twaddle">
+                    <input type="text" name="name" id="name" placeholder="Twaddle">
                     <br><br>
                     <label for="title">Title:</label>
-                    <input type="text" name="ittle" placeholder="Go Consulting prices rise (again)">
+                    <input type="text" name="title" id="title" placeholder="Go Consulting prices rise (again)">
                     <br><br>
-                    <textarea type="textarea" name="content" placeholder="Why is it that Go Consulting's prices must always go up?"></textarea>
+                    <label for="content">Article content:</label>
+                    <textarea type="textarea" name="content" id="content" placeholder="Why is it that Go Consulting's prices must always go up?"></textarea>
                     <br><br>
                     <input type="submit">
                 </form>
