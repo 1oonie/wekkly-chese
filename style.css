@@ -18,7 +18,7 @@ main {
     background-color: white;
     border-radius: 10px;
     width: 50vw;
-    height: 90vh;
+    min-height: 90vh;
 
     display: flex;
     flex-direction: column;
@@ -30,7 +30,7 @@ header {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     width: 45vw;
-    height: 20vh;
+    min-height: 20vh;
 
     display: flex;
     align-items: center;
@@ -123,10 +123,8 @@ textarea {
 
 section {
     width: auto;
-    padding-left: 2.5vw;
-    padding-right: 2.5vw;
-    padding-bottom: 2.5vh;
     overflow: auto;
+    padding: 0 2.5vw 2.5vw;
 }
 
 section ul {
