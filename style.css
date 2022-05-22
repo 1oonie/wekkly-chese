@@ -23,8 +23,6 @@ main {
     display: flex;
     flex-direction: column;
     align-content: stretch;
-
-    box-shadow: 5px 5px #000000;
 }
 
 header {
@@ -32,7 +30,7 @@ header {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     width: 45vw;
-    height: 15vh;
+    height: 20vh;
 
     display: flex;
     align-items: center;
@@ -41,9 +39,30 @@ header {
     padding: 2vh 2.5vw;
 }
 
-@media screen and (max-width: 900px) {
-    body{
-        margin: 10px !important;
+nav {
+    flex-grow: 1;
+    display: inline-flex;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+@media screen and (max-width: 850px) {
+    header {
+        flex-direction: row;
+    }
+
+    nav {
+        justify-content: flex-start;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    body {
+        margin-top: 5vh;
+        margin-bottom: 5vh;
+        margin-left: 15vw;
+        margin-right: 15vw;
     }
     main {
         width: auto;
@@ -53,12 +72,19 @@ header {
     }
 }
 
-nav {
-    flex-grow: 1;
-    display: inline-flex;
-    flex-wrap: nowrap;
-    justify-content: flex-end;
-    gap: 10px;
+@media screen and (max-width: 600px) {
+    body {
+        margin-top: 5vh;
+        margin-bottom: 5vh;
+        margin-left: 5vw;
+        margin-right: 5vw;
+    }
+    main {
+        width: auto;
+    }
+    header {
+        width: auto;
+    }
 }
 
 button, nav a, input[type="submit"] {
@@ -96,12 +122,15 @@ textarea {
 }
 
 section {
-    padding: 0 2.5vw;
+    width: auto;
+    padding-left: 2.5vw;
+    padding-right: 2.5vw;
+    padding-bottom: 2.5vh;
+    overflow: auto;
 }
 
 section ul {
     padding: 0;
-    height: 52.5vh;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 1vh 1vw;
@@ -115,7 +144,7 @@ section ul li a {
     flex-direction: column;
     text-decoration: none;
 
-    height: 25.25vh;
+    height: 25vh;
     background-color: rgb(230, 238, 255);
     color: rgb(28, 35, 37);
     font-weight: normal;
@@ -127,9 +156,9 @@ section ul li a {
 }
 
 section ul li :after {
-    content: "Read More\A0\226b";
+    content: "Read More";
     text-align: right;
-    font-size: larger;
+    text-decoration: underline;
 
     flex-grow: 1;
     display: flex;
@@ -140,9 +169,26 @@ section ul li a ::after {
     content: "";
 }
 
+section ul li a h3 {
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
 @media screen and (max-width: 900px) {
     section ul {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    section ul {
         grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    section ul {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -150,6 +196,7 @@ section ul li a:hover {
     background-color: rgb(255, 255, 255);
     color: rgb(26, 31, 44);
     border: rgb(77, 133, 255) solid 2px;
+    text-decoration: none;
 }
 
 a:hover, input[type="submit"]:hover {
