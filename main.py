@@ -21,4 +21,4 @@ async def submit(request: Request) -> TemplateResponse:
     return templates.TemplateResponse(name="submit.jinja2", context={"request": request})
 
 if __name__ == "__main__":
-    uvicorn.run(app) # type: ignore
+    uvicorn.run(app, port=8080) # type: ignore
