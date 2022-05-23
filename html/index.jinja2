@@ -1,0 +1,27 @@
+{% extends "base.jinja2" %}
+{% block title %}Homepage{% endblock %}
+
+{% block nav %}
+<a href="/submit">Submit an article</a>
+<a href="/alan">Alan Portal</a>
+{% endblock %}
+
+{% block content %}
+<p>Louis' high quality journalism of current events brought to you for just 4cc/month, or 2cc/issue!</p>
+<p>Owned by the Less Debt Fund.</p>
+<h2>Articles</h2>
+<ul>
+    <li>
+        <a href="https://example.com">
+            <h3>Article title</h3>
+            <p>A lovely article description...</p>
+        </a>
+    </li>
+    <li>
+        <a href="https://example.com">
+            <h3>Article title</h3>
+            <p>A lovely article description...</p>
+        </a>
+    </li>
+</ul>
+{% endblock %}

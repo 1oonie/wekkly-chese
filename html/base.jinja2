@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %} — Wekkly Chese</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <main>
+        <header>
+            <h1>The Wekkly Chese</h1>
+            <nav>{% block nav %}{% endblock %}</nav>
+        </header>
+        <section>
+            {% block content %}{% endblock %}
+        </section>
+</body

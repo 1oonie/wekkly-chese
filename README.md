@@ -4,6 +4,10 @@ An epic wekkly chese
 
 ## Deploying
 
-Git clone it.
-
-Open HTML file.
+```sh
+$ git clone https://github.com/AnimateShadows/wekkly-chese
+$ cd wekkly-chese
+$ python3 -m venv venv
+$ pip install -r requirements.txt
+$ python3 main.py
+```

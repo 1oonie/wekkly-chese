@@ -1,0 +1,4 @@
+starlette
+python-multipart
+Jinja2
+uvicorn
