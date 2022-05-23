@@ -12,11 +12,11 @@
 <h2>Articles</h2>
     {% if posts %}
     <ul>
-    {% for author, title, content in posts %}
+    {% for post in posts %}
         <li>
-            <a href="{{ 'articles/' + title }}">
-                <h3>{{ title.title() }}</h3>
-                <p>{{ content[:20] + "..." }} — {{ author }}</p>
+            <a href="{{ 'articles/' + post['url_name'] }}">
+                <h3>{{ post["title"] }}</h3>
+                <p>{{ post["content"][:100] + "..." }} — {{ post["author"] }}</p>
             </a>
         </li>
     {% endfor %}

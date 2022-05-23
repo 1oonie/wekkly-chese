@@ -145,6 +145,7 @@ section ul {
 }
 
 section ul li a {
+    word-wrap: break-word;
     display: flex;
     flex-direction: column;
     text-decoration: none;
@@ -222,4 +223,8 @@ a {
 
 a:hover {
     text-decoration: none;
+}
+
+pre {
+    font-family: inherit;
 }

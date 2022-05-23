@@ -12,45 +12,25 @@ from starlette.staticfiles import StaticFiles
 from starlette.templating import Jinja2Templates
 from starlette.templating import _TemplateResponse as TemplateResponse
 
+from database import Database
+
+d = Database("database.sqlite")
+
 app = Starlette(
-    routes=[Mount("/static", StaticFiles(directory="static"), name="static")]
+    routes=[Mount("/static", StaticFiles(directory="static"), name="static")],
+    on_startup=[d.connect],
+    on_shutdown=[d.disconnect],
 )
 
 templates = Jinja2Templates("html")
 
 
-def get_posts():
-    posts = []
-    path = "./static/articles"
-    for file in os.listdir(path):
-        if file.startswith("."):
-            continue
-
-        with open(path + "/" + file + "/author", "r") as fp:
-            author = fp.read()
-        with open(path + "/" + file + "/content", "r") as fp:
-            content = fp.read()
-
-        posts.append((author, file, content))
-    return posts
-
-
 @app.route("/", methods=["GET"])
 async def home(request: Request) -> TemplateResponse:
-    posts = await asyncio.get_event_loop().run_in_executor(None, get_posts)
+    posts = await d.connection.fetchall("SELECT * FROM articles;")
     return templates.TemplateResponse(
         name="index.jinja2", context={"request": request, "posts": posts}
     )
-
-
-def create_post(author: str, title: str, content: str):
-    path = "./static/articles/" + title
-    os.mkdir(path)
-    with open(path + "/author", "w") as fp:
-        fp.write(author)
-
-    with open(path + "/content", "w") as fp:
-        fp.write(content)
 
 
 @app.route("/submit", methods=["GET", "POST"])
@@ -62,9 +42,15 @@ async def submit(request: Request) -> Union[TemplateResponse, RedirectResponse]:
     else:
         form = await request.form()
         author, title, content = tuple(form.values())
-        if not os.path.exists("./static/articles/" + title.lower()):
-            await asyncio.get_event_loop().run_in_executor(
-                None, functools.partial(create_post, author, title.lower(), content)
+        if not await d.connection.fetchone(
+            "SELECT * FROM articles WHERE title=?;", title
+        ):
+            await d.connection.execute(
+                "INSERT INTO articles(url_name, title, author, content) VALUES (?, ?, ?, ?);",
+                title.lower().replace(" ", "-"),
+                title,
+                author,
+                content,
             )
 
             return RedirectResponse("/", status_code=303)
@@ -76,30 +62,17 @@ async def submit(request: Request) -> Union[TemplateResponse, RedirectResponse]:
             )
 
 
-def get_post(name: str):
-    path = "./static/articles/" + name + "/"
-    with open(path + "author", "r") as fp:
-        author = fp.read()
-    with open(path + "content", "r") as fp:
-        content = fp.read()
-
-    return author, content
-
-
 @app.route("/articles/{name}", methods=["GET"])
 async def article(request: Request) -> Union[TemplateResponse, RedirectResponse]:
     name = request.path_params["name"].lower()
-    if os.path.exists("./static/articles/" + name):
-        author, content = await asyncio.get_event_loop().run_in_executor(
-            None, functools.partial(get_post, name)
-        )
+    if row := await d.connection.fetchone("SELECT * FROM articles WHERE url_name=?;", name):
         return templates.TemplateResponse(
             name="article.jinja2",
             context={
                 "request": request,
-                "title": name,
-                "author": author,
-                "content": content,
+                "title": row["title"],
+                "author": row["author"],
+                "content": row["content"],
             },
         )
     else:
@@ -108,6 +81,14 @@ async def article(request: Request) -> Union[TemplateResponse, RedirectResponse]
             headers={"X-Error-Reason": "That article does not appear to exist..."},
             status_code=303,
         )
+
+
+@app.route("/error", methods=["GET"])
+async def error(request: Request) -> TemplateResponse:
+    reason = request.headers["X-Error-Reason"]
+    return templates.TemplateResponse(
+        name="error.jinaj2", context={"request": request, "reason": reason}
+    )
 
 
 if __name__ == "__main__":
