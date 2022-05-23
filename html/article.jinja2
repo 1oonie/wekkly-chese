@@ -1,0 +1,12 @@
+{% extends "base.jinja2" %}
+{% block title %}{{ title.title() }}{% endblock %}
+
+{% block nav %}
+<a href="/">Home</a>
+{% endblock %}
+
+{% block content %}
+<h2>{{ title.title() }}</h2>
+<p>{{ content }}</p>
+<p>This article was kindly written by {{ author }}.</p>
+{% endblock %}

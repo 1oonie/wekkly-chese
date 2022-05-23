@@ -10,18 +10,18 @@
 <p>Louis' high quality journalism of current events brought to you for just 4cc/month, or 2cc/issue!</p>
 <p>Owned by the Less Debt Fund.</p>
 <h2>Articles</h2>
-<ul>
-    <li>
-        <a href="https://example.com">
-            <h3>Article title</h3>
-            <p>A lovely article description...</p>
-        </a>
-    </li>
-    <li>
-        <a href="https://example.com">
-            <h3>Article title</h3>
-            <p>A lovely article description...</p>
-        </a>
-    </li>
-</ul>
+    {% if posts %}
+    <ul>
+    {% for author, title, content in posts %}
+        <li>
+            <a href="{{ 'articles/' + title }}">
+                <h3>{{ title.title() }}</h3>
+                <p>{{ content[:20] + "..." }} — {{ author }}</p>
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p>There are no posts. Come back later or make one yourself.</p>
+    {% endif %}
 {% endblock %}
