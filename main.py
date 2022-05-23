@@ -1,6 +1,3 @@
-import asyncio
-import functools
-import os
 from typing import Union
 
 import uvicorn
@@ -57,14 +54,17 @@ async def submit(request: Request) -> Union[TemplateResponse, RedirectResponse]:
             return RedirectResponse("/", status_code=303)
         else:
             return templates.TemplateResponse(
-                name="error.jinja2", context={"request": request, "reason": "That article already exists!"}
+                name="error.jinja2",
+                context={"request": request, "reason": "That article already exists!"},
             )
 
 
 @app.route("/articles/{name}", methods=["GET"])
 async def article(request: Request) -> Union[TemplateResponse, RedirectResponse]:
     name = request.path_params["name"].lower()
-    if row := await d.connection.fetchone("SELECT * FROM articles WHERE url_name=?;", name):
+    if row := await d.connection.fetchone(
+        "SELECT * FROM articles WHERE url_name=?;", name
+    ):
         return templates.TemplateResponse(
             name="article.jinja2",
             context={
@@ -76,7 +76,8 @@ async def article(request: Request) -> Union[TemplateResponse, RedirectResponse]
         )
     else:
         return templates.TemplateResponse(
-            name="error.jinja2", context={"request": request, "reason": "That article does not exist."}
+            name="error.jinja2",
+            context={"request": request, "reason": "That article does not exist."},
         )
 
 
