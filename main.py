@@ -42,12 +42,13 @@ async def submit(request: Request) -> Union[TemplateResponse, RedirectResponse]:
     else:
         form = await request.form()
         author, title, content = tuple(form.values())
+        url_name = title.lower().replace(" ", "-")
         if not await d.connection.fetchone(
-            "SELECT * FROM articles WHERE title=?;", title
+            "SELECT * FROM articles WHERE url_name=?;", url_name
         ):
             await d.connection.execute(
                 "INSERT INTO articles(url_name, title, author, content) VALUES (?, ?, ?, ?);",
-                title.lower().replace(" ", "-"),
+                url_name,
                 title,
                 author,
                 content,
@@ -55,10 +56,8 @@ async def submit(request: Request) -> Union[TemplateResponse, RedirectResponse]:
 
             return RedirectResponse("/", status_code=303)
         else:
-            return RedirectResponse(
-                "/error",
-                headers={"X-Error-Reason": "Article already exists!"},
-                status_code=303,
+            return templates.TemplateResponse(
+                name="error.jinja2", context={"request": request, "reason": "That article already exists!"}
             )
 
 
@@ -76,19 +75,9 @@ async def article(request: Request) -> Union[TemplateResponse, RedirectResponse]
             },
         )
     else:
-        return RedirectResponse(
-            "/error",
-            headers={"X-Error-Reason": "That article does not appear to exist..."},
-            status_code=303,
+        return templates.TemplateResponse(
+            name="error.jinja2", context={"request": request, "reason": "That article does not exist."}
         )
-
-
-@app.route("/error", methods=["GET"])
-async def error(request: Request) -> TemplateResponse:
-    reason = request.headers["X-Error-Reason"]
-    return templates.TemplateResponse(
-        name="error.jinaj2", context={"request": request, "reason": reason}
-    )
 
 
 if __name__ == "__main__":
