@@ -39,7 +39,22 @@ async def submit(request: Request) -> Union[TemplateResponse, RedirectResponse]:
     else:
         form = await request.form()
         author, title, content = tuple(form.values())
-        url_name = "".join(filter(lambda x: x.isalnum() or x == " ", title.lower())).replace(" ", "-")
+        url_name = "".join(
+            filter(lambda x: x in "!#$&'()*+,/:;=?@[]", title.lower())
+        ).replace(" ", "-")
+
+        if not url_name:
+            return templates.TemplateResponse(
+                name="error.jinja2",
+                context={
+                    "request": request,
+                    "reason": "The most edge case of all edge cases: your article name was comprised"
+                    " entirely of RFC 3986 section 2.2 Reserved Characters, they were all "
+                    "stripped and now your article is called nothing...",
+                },
+                status_code=400,
+            )
+
         if not await d.connection.fetchone(
             "SELECT * FROM articles WHERE url_name=?;", url_name
         ):
@@ -56,7 +71,7 @@ async def submit(request: Request) -> Union[TemplateResponse, RedirectResponse]:
             return templates.TemplateResponse(
                 name="error.jinja2",
                 context={"request": request, "reason": "That article already exists!"},
-                status_code=400
+                status_code=400,
             )
 
 
@@ -79,7 +94,7 @@ async def article(request: Request) -> Union[TemplateResponse, RedirectResponse]
         return templates.TemplateResponse(
             name="error.jinja2",
             context={"request": request, "reason": "That article does not exist."},
-            status_code=404
+            status_code=404,
         )
 
 
