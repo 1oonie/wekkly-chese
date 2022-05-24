@@ -15,8 +15,8 @@
     {% for post in posts %}
         <li>
             <a href="{{ 'articles/' + post['url_name'] }}">
-                <h3>{{ post["title"] }}</h3>
-                <p>{{ post["content"][:100] + "..." }} —&nbsp; {{ post["author"] }}</p>
+                <h3>{{ post["title"][:100] }}</h3>
+                <p>{{ post["content"][:100] + "..." }} —&nbsp; {{ post["author"][:30] }}</p>
             </a>
         </li>
     {% endfor %}

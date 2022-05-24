@@ -40,7 +40,7 @@ async def submit(request: Request) -> Union[TemplateResponse, RedirectResponse]:
         form = await request.form()
         author, title, content = tuple(form.values())
         url_name = "".join(
-            filter(lambda x: x not in "!#$&'()*+,/:;=?@[]", title.lower())
+            filter(lambda x: x not in "\"!#$&'()*+,/:;=?@[]", title.lower())
         ).replace(" ", "-")
 
         if not url_name:
