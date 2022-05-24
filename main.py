@@ -39,7 +39,7 @@ async def submit(request: Request) -> Union[TemplateResponse, RedirectResponse]:
     else:
         form = await request.form()
         author, title, content = tuple(form.values())
-        url_name = "".join(filter(str.isalnum, title.lower().replace(" ", "-")))
+        url_name = "".join(filter(lambda x: x.isalnum() or x == " ", title.lower())).replace(" ", "-")
         if not await d.connection.fetchone(
             "SELECT * FROM articles WHERE url_name=?;", url_name
         ):
