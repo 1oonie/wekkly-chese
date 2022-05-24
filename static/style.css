@@ -227,4 +227,5 @@ a:hover {
 
 pre {
     font-family: inherit;
+    white-space: pre-wrap;
 }
