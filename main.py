@@ -56,6 +56,7 @@ async def submit(request: Request) -> Union[TemplateResponse, RedirectResponse]:
             return templates.TemplateResponse(
                 name="error.jinja2",
                 context={"request": request, "reason": "That article already exists!"},
+                status_code=400
             )
 
 
@@ -78,6 +79,7 @@ async def article(request: Request) -> Union[TemplateResponse, RedirectResponse]
         return templates.TemplateResponse(
             name="error.jinja2",
             context={"request": request, "reason": "That article does not exist."},
+            status_code=404
         )
 
 

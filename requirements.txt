@@ -2,3 +2,4 @@ starlette
 python-multipart
 Jinja2
 uvicorn
+git+https://github.com/Rapptz/asqlite
