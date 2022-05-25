@@ -39,9 +39,7 @@ async def submit(request: Request) -> Union[TemplateResponse, RedirectResponse]:
     else:
         form = await request.form()
         author, title, content = tuple(form.values())
-        url_name = "".join(
-            filter(lambda x: x not in "\"!#$&'()*+,/:;=?@[]", title.lower())
-        ).replace(" ", "-")
+        url_name = title.lower().strip("\"!#$&'()*+,/:;=?@[]-<>@~|\\.%").replace(" ", "-")
 
         if not url_name:
             return templates.TemplateResponse(
