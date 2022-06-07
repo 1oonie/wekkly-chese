@@ -1,4 +1,8 @@
 from typing import Union
+import re
+
+RFC_3986_RESERVED_CHARACTERS = re.compile(r"[\"|!|#|$|&|'|(|)|*|+|,|/|:|;|=|?|@|\[|\]|-|<|>|@|~|\||\\|\.|%]|\s+")
+WHITESPACE = re.compile(r"\s+")
 
 import uvicorn
 from starlette.applications import Starlette
@@ -39,16 +43,16 @@ async def submit(request: Request) -> Union[TemplateResponse, RedirectResponse]:
     else:
         form = await request.form()
         author, title, content = tuple(form.values())
-        url_name = title.lower().strip("\"!#$&'()*+,/:;=?@[]-<>@~|\\.%").replace(" ", "-")
+        url_name = WHITESPACE.sub("-", RFC_3986_RESERVED_CHARACTERS.sub("", title.lower()))
 
         if not url_name:
             return templates.TemplateResponse(
                 name="error.jinja2",
                 context={
                     "request": request,
-                    "reason": "The most edge case of all edge cases: your article name was comprised"
-                    " entirely of RFC 3986 section 2.2 Reserved Characters, they were all "
-                    "stripped and now your article is called nothing...",
+                    "reason": "Your article name was comprised"
+                    " entirely of RFC 3986 section 2.2 Reserved Characters, they were all"
+                    " removed and now your article is called nothing...",
                 },
                 status_code=400,
             )
