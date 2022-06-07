@@ -1,7 +1,7 @@
 from typing import Union
 import re
 
-RFC_3986_RESERVED_CHARACTERS = re.compile(r"[\"|!|#|$|&|'|(|)|*|+|,|/|:|;|=|?|@|\[|\]|-|<|>|@|~|\||\\|\.|%]|\s+")
+RFC_3986_RESERVED_CHARACTERS = re.compile(r"[\"|!|#|$|&|'|(|)|*|+|,|/|:|;|=|?|@|\[|\]|-|<|>|@|~|\||\\|\.|%]")
 WHITESPACE = re.compile(r"\s+")
 
 import uvicorn
