@@ -196,10 +196,11 @@ section ul {
 }
 
 section ul li a {
-    word-wrap: break-word;
     display: flex;
     flex-direction: column;
     text-decoration: none;
+
+    max-width: 25.75vw;
 
     background-color: rgb(255, 255, 255);
     color: rgb(28, 35, 37);
@@ -209,6 +210,10 @@ section ul li a {
     padding: 10px;
 
     transition: .5s;
+}
+
+section ul li a * {
+    word-wrap: break-word;
 }
 
 section ul li a:hover {
@@ -245,11 +250,19 @@ section ul li a h3 {
     section ul {
         grid-template-columns: 1fr 1fr;
     }
+
+    section ul li a {
+        max-width: 45vw;
+    }
 }
 
 @media screen and (max-width: 700px) and (min-device-width: 700px) {
     section ul {
         grid-template-columns: 1fr;
+    }
+
+    section ul li a {
+        max-width: 90vw;
     }
 }
 
@@ -260,6 +273,10 @@ section ul li a h3 {
 
     section ul li a {
         background-color: rgb(230, 238, 255);
+    }
+
+    section ul li a {
+        max-width: 90vw;
     }
 }
 
