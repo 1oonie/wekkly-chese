@@ -200,7 +200,7 @@ section ul li a {
     flex-direction: column;
     text-decoration: none;
 
-    max-width: 25.75vw;
+    max-width: calc(55vw / 3);
 
     background-color: rgb(255, 255, 255);
     color: rgb(28, 35, 37);
@@ -246,13 +246,19 @@ section ul li a h3 {
     margin-bottom: 0;
 }
 
+@media screen and (max-width: 1300px) and (min-device-width: 700px) {
+    section ul li a {
+        max-width: calc(85vw / 3);
+    }
+}
+
 @media screen and (max-width: 900px) and (min-device-width: 700px) {
     section ul {
         grid-template-columns: 1fr 1fr;
     }
 
     section ul li a {
-        max-width: 45vw;
+        max-width: 42.5vw;
     }
 }
 
