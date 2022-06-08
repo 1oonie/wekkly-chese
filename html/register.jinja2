@@ -1,0 +1,20 @@
+{% extends "base.jinja2" %}
+{% block title %}Register{% endblock %}
+
+{% block nav %}
+<a href="/">Home</a>
+{% endblock %}
+
+{% block content %}
+<h2>Create a new account</h2>
+<form autocomplete="off" autocapitalize="on" method="POST">
+    <label for="username">Username:</label>
+    <input type="text" name="username" id="username" placeholder="Twaddle" required>
+    <br><br>
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password" placeholder="password892" required>
+    <br><br>
+    <input type="submit">
+</form>
+<p>Already have an account? Login <a href="/login">here</a>.</p>
+{% endblock %}

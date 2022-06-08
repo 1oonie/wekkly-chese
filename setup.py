@@ -5,5 +5,6 @@ with open("schema.sql") as fp:
 
 connection = sqlite3.connect("database.sqlite")
 connection.executescript(schema)
+print("executed schema")
 
 connection.close()

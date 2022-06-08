@@ -33,6 +33,19 @@ async def home(request: Request) -> TemplateResponse:
         name="index.jinja2", context={"request": request, "posts": posts}
     )
 
+@app.route("/login", methods=["GET", "POST"])
+async def login(request: Request) -> TemplateResponse:
+    if request.method == "GET":
+        return templates.TemplateResponse(
+            name="login.jinja2", context={"request": request}
+        )
+
+@app.route("/register", methods=["GET", "POST"])
+async def register(request: Request) -> TemplateResponse:
+    if request.method == "GET":
+        return templates.TemplateResponse(
+            name="register.jinja2", context={"request": request}
+        )
 
 @app.route("/submit", methods=["GET", "POST"])
 async def submit(request: Request) -> Union[TemplateResponse, RedirectResponse]:
