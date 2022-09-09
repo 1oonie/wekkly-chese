@@ -1,20 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <title>{{ title }}</title>
+        <meta charset="UTF-8"/>
+        <link rel="stylesheet" href="/static/css/style.css"/>
+    </head>
+    <body>
+        <div id="settings">
+            <p><a href="/">Home</a></p>
+            <p>Theme:</p>
+            <select>
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+            </select>
+        </div>
+        <div id="content">
+            {{ content | safe }}
+            <small>Please vote for the Green Socialist Ferrat Party</small>
+        </div>
+    </body>
+    <script>
+        const body = document.querySelector("body");
+        const select = document.querySelector("select");
 
-<head>
-    <meta charset="utf-8">
-    <title>{% block title %}{% endblock %} — Wekkly Chese</title>
-    <link rel="stylesheet" href="/static/style.css">
-</head>
+        let theme = localStorage.getItem("theme");
+        if (theme === null) {
+            localStorage.setItem("theme", "light");
+        } else if (theme === "dark") {
+            body.classList.add("dark")
+            select.value = "dark";
+        } else {
+            select.value = "light";
+        }
 
-<body>
-    <main>
-        <header>
-            <h1>The Wekkly Chese</h1>
-            <nav>{% block nav %}{% endblock %}</nav>
-        </header>
-        <section>
-            {% block content %}{% endblock %}
-        </section>
-    </main>
-</body
+        select.onchange = (ev) => {
+            let value = select.value;
+            localStorage.setItem("theme", value);
+            if (value === "dark") {
+                body.classList.add("dark");
+            } else {
+                body.classList.remove("dark");
+            }
+        }
+    </script>
+</html>

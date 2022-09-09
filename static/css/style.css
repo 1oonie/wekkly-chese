@@ -1,0 +1,45 @@
+body {
+    font-family: serif;
+    color: #121212;
+    background-color: #fefefe;
+    min-height: 100vh;
+    margin: 0;
+}
+
+body.dark {
+    color: #fefefe;
+    background-color: #121212;
+}
+
+body.dark a, body.dark a:visited {
+    color: #fefefe;
+}
+
+#content {
+    margin: 50px;
+    max-width: 750px;
+}
+
+img {
+    max-width: 750px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: sans-serif;
+}
+
+small {
+    font-size: 0.7rem;
+}
+
+#settings {
+    margin-left: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+select {
+    height: min-content;
+}
