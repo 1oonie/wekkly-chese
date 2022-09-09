@@ -12,6 +12,7 @@
             <select>
                 <option value="light">Light</option>
                 <option value="dark">Dark</option>
+                <option value="twilight">Twilight</option>
             </select>
         </div>
         <div id="content">
@@ -29,15 +30,21 @@
         } else if (theme === "dark") {
             body.classList.add("dark")
             select.value = "dark";
+        } else if (theme === "twilight") {
+            body.classList.add("twilight")
+            select.value = "twilight";
         } else {
             select.value = "light";
         }
 
         select.onchange = (ev) => {
             let value = select.value;
+            body.className = "";
             localStorage.setItem("theme", value);
             if (value === "dark") {
                 body.classList.add("dark");
+            } if (value === "twilight") {
+                body.classList.add("twilight");
             } else {
                 body.classList.remove("dark");
             }

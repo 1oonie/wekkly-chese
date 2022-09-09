@@ -6,12 +6,16 @@ body {
     margin: 0;
 }
 
-body.dark {
+body.dark, body.twilight {
     color: #fefefe;
     background-color: #121212;
 }
 
-body.dark a, body.dark a:visited {
+body.twilight {
+    background: url("https://images4.alphacoders.com/833/8334.jpg") no-repeat center center fixed;
+}
+
+body.dark a, body.dark a:visited, body.twilight a, body.twilight a:visited {
     color: #fefefe;
 }
 
